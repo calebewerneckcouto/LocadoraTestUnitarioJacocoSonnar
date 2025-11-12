@@ -3,51 +3,52 @@
 ## Estrutura do Projeto
 
 ```
-locadora-filmes/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   ├── br/
-│   │   │   │   ├── cwcdev/
-│   │   │   │   │   ├── entidades/
-│   │   │   │   │   │   ├── Filme.java
-│   │   │   │   │   │   ├── Locacao.java
-│   │   │   │   │   │   ├── Usuario.java
-│   │   │   │   │   ├── exceptions/
-│   │   │   │   │   │   ├── DadosInvalidosException.java
-│   │   │   │   │   │   ├── EstoqueInsuficienteException.java
-│   │   │   │   │   ├── service/
-│   │   │   │   │   │   ├── LocacaoService.java
-│   ├── test/
-│       ├── java/
-│       │   ├── br/
-│       │   │   ├── cwcdev/
-│       │   │   │   ├── entidades/
-│       │   │   │   │   ├── FilmeTest.java
-│       │   │   │   │   ├── LocacaoTest.java
-│       │   │   │   │   ├── UsuarioTest.java
-│       │   │   │   ├── service/
-│       │   │   │   │   ├── LocacaoServiceTest.java
+src/
+├── main/
+│   ├── java/
+│   │   └── br/com/cwcdev/
+│   │       ├── entidades/
+│   │       │   ├── Filme.java
+│   │       │   ├── Locacao.java
+│   │       │   └── Usuario.java
+│   │       ├── exceptions/
+│   │       │   ├── DadosInvalidosException.java
+│   │       │   ├── EstoqueInsuficienteException.java
+│   │       │   └── LocacaoException.java
+│   │       └── service/
+│   │           └── LocacaoService.java
+│   └── resources/
+└── test/
+    └── java/
+        └── br/com/cwcdev/
+            ├── entidades/
+            │   ├── FilmeTest.java
+            │   ├── LocacaoTest.java
+            │   └── UsuarioTest.java
+            └── service/
+                └── LocacaoServiceTest.java
 ```
 
 ## Linguagens de Programação Usadas
 
-- Java
+- **Java**: Principal linguagem de programação utilizada para o desenvolvimento do projeto.
 
 ## Dependências e Instruções de Instalação
 
 ### Dependências
 
-- JUnit 5 (para testes unitários)
-- Java 8 (para suporte à classe `LocalDate`)
+- **JUnit 5**: Utilizado para a execução de testes unitários.
+- **Java 8 ou superior**: Utilizado para manipulação de datas com a classe `LocalDate`.
 
 ### Instruções de Instalação
 
-1. Clone o repositório.
-2. Certifique-se de ter o Java 8 ou superior instalado.
-3. Instale as dependências usando Maven ou Gradle.
+1. **Clone o repositório**:
+   ```bash
+   git clone https://github.com/seuusuario/locadora-de-filmes.git
+   ```
 
-   **Maven**:
+2. **Instale as dependências**:
+   Utilize Maven ou Gradle para gerenciar as dependências. Se estiver usando Maven, adicione as seguintes dependências ao `pom.xml`:
    ```xml
    <dependencies>
        <dependency>
@@ -59,126 +60,82 @@ locadora-filmes/
    </dependencies>
    ```
 
-   **Gradle**:
-   ```gradle
-   dependencies {
-       testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-   }
-   ```
-
-4. Compile e execute o projeto usando seu IDE ou a linha de comando.
-
 ## Como Rodar o Projeto e Executar Testes
 
 ### Rodar o Projeto
 
-1. Abra o projeto em seu IDE.
-2. Execute a classe principal da aplicação (não fornecida no resumo, mas geralmente localizada no pacote `main`).
+1. **Compile o projeto**:
+   ```bash
+   mvn clean install
+   ```
+   ou
+   ```bash
+   gradle build
+   ```
+
+2. **Execute a aplicação**:
+   ```bash
+   java -cp target/locadora-de-filmes-1.0-SNAPSHOT.jar br.com.cwcdev.Main
+   ```
+   (Note que o comando acima assume que você tem uma classe `Main` como ponto de entrada. Adapte conforme necessário.)
 
 ### Executar Testes
 
-1. Abra o projeto em seu IDE.
-2. Execute os testes nas classes localizadas em `src/test/java/`.
-3. Alternativamente, use Maven ou Gradle para executar os testes.
-
-   **Maven**:
-   ```bash
-   mvn test
-   ```
-
-   **Gradle**:
-   ```bash
-   gradle test
-   ```
+```bash
+mvn test
+```
+ou
+```bash
+gradle test
+```
 
 ## Explicação Detalhada dos Arquivos de Código
 
 ### `LocacaoService.java`
 
-**Responsabilidades**:
-- Gerencia o processo de aluguel de filmes.
-- Valida os dados de entrada.
-- Atualiza o estoque do filme após uma locação bem-sucedida.
-
-**Métodos**:
-- `alugarFilme(Usuario usuario, Filme filme)`: Aluga um filme para um usuário.
-- `criarLocacao(Usuario usuario, Filme filme)`: Cria uma nova locação.
-
-**Exceções**:
-- `DadosInvalidosException`: Lançada quando os dados de entrada são inválidos.
-- `EstoqueInsuficienteException`: Lançada quando não há estoque suficiente.
+- **Funções**:
+  - `alugarFilme(Usuario usuario, Filme filme)`: Gerencia o processo de aluguel, validando dados e reduzindo o estoque.
+  - `validarDadosLocacao(Usuario usuario, Filme filme)`: Valida os dados do usuário e do filme, lançando exceções se necessário.
+  - `reduzirEstoque(Filme filme)`: Reduz o estoque do filme em uma unidade.
 
 ### `EstoqueInsuficienteException.java`
 
-**Responsabilidades**:
-- Exceção lançada quando o estoque de um filme é insuficiente.
+- **Responsabilidade**: Exceção lançada quando o estoque de um filme é insuficiente.
 
 ### `Usuario.java`
 
-**Responsabilidades**:
-- Armazena informações básicas sobre um usuário.
-
-**Métodos**:
-- Construtores para inicializar um usuário.
-- Getters e setters para `nome` e `email`.
-
-### `FilmeTest.java`
-
-**Responsabilidades**:
-- Testa a classe `Filme`.
-
-**Funções**:
-- `deveCriarFilmeCorretamente()`: Testa a criação de um filme.
-- `devePermitirAlteracaoDeEstoque()`: Testa a alteração do estoque de um filme.
+- **Atributos**: `nome` e `email`.
+- **Funções**: Métodos getters e setters para os atributos, além de um construtor.
 
 ### `Filme.java`
 
-**Responsabilidades**:
-- Armazena informações básicas sobre um filme.
-
-**Métodos**:
-- Construtores para inicializar um filme.
-- Getters e setters para `titulo`, `estoque` e `valor`.
-
-### `LocacaoServiceTest.java`
-
-**Responsabilidades**:
-- Testa a classe `LocacaoService`.
-
-**Funções**:
-- `deveAlugarFilmeComSucesso()`: Testa o aluguel bem-sucedido de um filme.
-- `deveReduzirEstoqueAposLocacao()`: Testa a redução do estoque após uma locação.
-
-### `DadosInvalidosException.java`
-
-**Responsabilidades**:
-- Exceção lançada quando os dados de entrada são inválidos.
+- **Atributos**: `titulo`, `estoque` e `valor`.
+- **Funções**: Métodos getters e setters para os atributos, além de construtores e `toString()`.
 
 ### `Locacao.java`
 
-**Responsabilidades**:
-- Armazena informações sobre uma locação de filme.
+- **Atributos**: `usuario`, `filme`, `valor`, `dataLocacao` e `dataRetorno`.
+- **Funções**: Métodos getters e setters para os atributos, além de construtores e `toString()`.
 
-**Métodos**:
-- Construtores para inicializar uma locação.
-- Getters e setters para `usuario`, `filme`, `valor`, `dataLocacao` e `dataRetorno`.
+### `LocacaoServiceTest.java`
 
-### `LocacaoTest.java`
-
-**Responsabilidades**:
-- Testa a classe `Locacao`.
-
-**Funções**:
-- `deveCriarLocacaoCorretamente()`: Testa a criação de uma locação.
+- **Funções**: Testa o método `alugarFilme` do `LocacaoService`, verificando a criação correta da locação e a redução do estoque.
 
 ### `UsuarioTest.java`
 
-**Responsabilidades**:
-- Testa a classe `Usuario`.
+- **Funções**: Testa a criação e alteração de dados da classe `Usuario`.
 
-**Funções**:
-- `deveCriarUsuarioCorretamente()`: Testa a criação de um usuário.
-- `devePermitirAlteracaoDeDados()`: Testa a alteração dos dados de um usuário.
+### `FilmeTest.java`
+
+- **Funções**: Testa a criação e alteração de dados da classe `Filme`.
+
+### `DadosInvalidosException.java`
+
+- **Responsabilidade**: Exceção lançada quando os dados de entrada são inválidos.
+
+### `LocacaoTest.java`
+
+- **Funções**: Testa a criação correta de uma instância de `Locacao`.
 
 ## Exemplos de Uso
 
@@ -187,36 +144,41 @@ locadora-filmes/
 ```java
 Usuario usuario = new Usuario("João", "joao@email.com");
 Filme filme = new Filme("Filme Teste", 5, 10.0);
-try {
-    LocacaoService service = new LocacaoService();
-    Locacao locacao = service.alugarFilme(usuario, filme);
-    System.out.println(locacao.toString());
-} catch (EstoqueInsuficienteException | DadosInvalidosException e) {
-    System.err.println(e.getMessage());
-}
+LocacaoService service = new LocacaoService();
+Locacao locacao = service.alugarFilme(usuario, filme);
+System.out.println(locacao.toString());
 ```
 
 ## Boas Práticas e Dicas para Contribuir
 
-1. **Codificação**:
-   - Utilize nomes de variáveis e métodos descritivos.
-   - Mantenha métodos curtos e focados em uma única responsabilidade.
-   - Utilize comentários para explicar a lógica complexa.
+1. **Pull Requests**: Antes de enviar um PR, certifique-se de que todos os testes estão passando e que o código está formatado corretamente.
+2. **Testes**: Escreva testes para novas funcionalidades e corrija quaisquer testes quebrados.
+3. **Exceções**: Utilize as exceções personalizadas (`DadosInvalidosException`, `EstoqueInsuficienteException`) para manter a consistência no tratamento de erros.
+4. **Encapsulamento**: Mantenha os atributos das classes como privados e utilize getters e setters para manipulá-los.
+5. **Documentação**: Adicione comentários Javadoc para métodos e classes.
+6. **Nomenclatura**: Siga as convenções de nomenclatura do Java (camelCase para variáveis e métodos, PascalCase para classes).
 
-2. **Testes**:
-   - Escreva testes para todos os métodos públicos.
-   - Inclua testes para casos de sucesso e falha.
-   - Utilize `@BeforeEach` para inicializar objetos de teste.
+## Contribuindo
 
-3. **Gerenciamento de Dependências**:
-   - Utilize Maven ou Gradle para gerenciar as dependências do projeto.
+Para contribuir com este projeto, siga os passos abaixo:
 
-4. **Pull Requests**:
-   - Faça pull requests pequenos e focados.
-   - Inclua uma descrição detalhada das mudanças.
-
-5. **Documentação**:
-   - Mantenha a documentação atualizada.
-   - Utilize Javadoc para documentar classes e métodos.
+1. **Fork** o repositório.
+2. Clone o seu fork:
+   ```bash
+   git clone https://github.com/seuusuario/locadora-de-filmes.git
+   ```
+3. Crie uma branch para sua funcionalidade:
+   ```bash
+   git checkout -b feature-nome-da-funcionalidade
+   ```
+4. Faça commit das suas mudanças:
+   ```bash
+   git commit -m "Adiciona funcionalidade XYZ"
+   ```
+5. Push para o seu fork:
+   ```bash
+   git push origin feature-nome-da-funcionalidade
+   ```
+6. Abra um **Pull Request**.
 
 Para mais detalhes, consulte a [documentação](https://docs.maritaca.ai).
