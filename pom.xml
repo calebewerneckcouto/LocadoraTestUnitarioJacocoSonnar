@@ -145,8 +145,8 @@
                         <configuration>
                             <propertyName>surefireArgLine</propertyName>
                             <excludes>
-                                <exclude>br/com/cwcdev/entidades/**</exclude>
-                                <exclude>br/com/cwcdev/exceptions/**</exclude>
+                                <exclude>br/com/cwcdev/entidades/*</exclude>
+                                <exclude>br/com/cwcdev/exceptions/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -160,8 +160,8 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
                             <excludes>
-                                <exclude>br/com/cwcdev/entidades/**</exclude>
-                                <exclude>br/com/cwcdev/exceptions/**</exclude>
+                                <exclude>br/com/cwcdev/entidades/*</exclude>
+                                <exclude>br/com/cwcdev/exceptions/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -174,8 +174,8 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>br/com/cwcdev/entidades/**</exclude>
-                                <exclude>br/com/cwcdev/exceptions/**</exclude>
+                                <exclude>br/com/cwcdev/entidades/*</exclude>
+                                <exclude>br/com/cwcdev/exceptions/*</exclude>
                             </excludes>
                             <rules>
                                 <rule>
@@ -233,9 +233,13 @@
                 <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
                 <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
                 <sonar.coverage.exclusions>
-                    src/main/java/br/com/cwcdev/entidades/**,
-                    src/main/java/br/com/cwcdev/exceptions/**
+                    **/entidades/**,
+                    **/exceptions/**
                 </sonar.coverage.exclusions>
+                <sonar.cpd.exclusions>
+                    **/entidades/**,
+                    **/exceptions/**
+                </sonar.cpd.exclusions>
                 <sonar.language>java</sonar.language>
                 <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
             </properties>
